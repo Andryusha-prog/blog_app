@@ -8,7 +8,7 @@ class Post(models.Model):
     name = models.CharField(max_length=150, verbose_name='заголовок поста')
     text = models.TextField(verbose_name='текст поста')
     image = models.ImageField(blank=True, null=True, verbose_name='изображение', upload_to='articles/image/')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='автор поста')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='автор поста', blank=True, null=True)
     #comment = models.ForeignKey(Comment, on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='дата изменения')
@@ -22,7 +22,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='автор комментария')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='автор комментария', null=True, blank=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='ссылка на пост')
     text = models.TextField(verbose_name='текст комментария')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='дата создания')
